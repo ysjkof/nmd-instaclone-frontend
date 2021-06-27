@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { darkModeVar } from "../apollo";
 
 const Title = styled.h1`
   color: ${(props) => props.theme.fontColor};
