@@ -45,7 +45,6 @@ function Login() {
   const {
     register,
     handleSubmit,
-    errors,
     formState,
     getValues,
     setError,
@@ -62,9 +61,7 @@ function Login() {
       login: { ok, error, token },
     } = data;
     if (!ok) {
-      return setError("result", {
-        message: error,
-      });
+      return setError("result", { message: error });
     }
     if (token) {
       logUserIn(token);
@@ -85,6 +82,8 @@ function Login() {
   const clearLoginError = () => {
     clearErrors("result");
   };
+  console.log(formState);
+
   return (
     <AuthLayout>
       <PageTitle title="Login" />
@@ -95,37 +94,35 @@ function Login() {
         <Notification>{location?.state?.message}</Notification>
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
-            ref={register({
+            {...register("username", {
               required: "Username is required",
               minLength: {
-                value: 5,
-                message: "Username should be longer than 5 chars.",
+                value: 4,
+                message: "Username should be longer than 4 chars.",
               },
             })}
-            onChange={clearLoginError}
-            name="username"
+            onKeyDown={clearLoginError}
             type="text"
             placeholder="Username"
-            hasError={Boolean(errors?.username?.message)}
+            hasError={Boolean(formState.errors?.username?.message)}
           />
-          <FormError message={errors?.username?.message} />
+          <FormError message={formState.errors?.username?.message} />
           <Input
-            ref={register({
+            {...register("password", {
               required: "Password is required.",
             })}
-            onChange={clearLoginError}
-            name="password"
+            onKeyDown={clearLoginError}
             type="password"
             placeholder="Password"
-            hasError={Boolean(errors?.password?.message)}
+            hasError={Boolean(formState.errors?.password?.message)}
           />
-          <FormError message={errors?.password?.message} />
+          <FormError message={formState.errors?.password?.message} />
           <Button
             type="submit"
             value={loading ? "Loading..." : "Log in"}
             disabled={!formState.isValid || loading}
           />
-          <FormError message={errors?.result?.message} />
+          <FormError message={formState.errors?.result?.message} />
         </form>
         <Separator />
         <FacebookLogin>

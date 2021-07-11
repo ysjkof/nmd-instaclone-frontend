@@ -90,40 +90,35 @@ function SingUp() {
         </HeaderContainer>
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
-            ref={register({
+            {...register("firstName", {
               required: "First Name is required.",
             })}
-            name="firstName"
             type="text"
             placeholder="First Name"
           />
           <Input
-            ref={register}
+            {...register("lastName")}
             type="text"
             placeholder="Last Name"
-            name="lastName"
           />
           <Input
-            ref={register({
+            {...register("email", {
               required: "Email is required.",
             })}
-            name="email"
             type="text"
             placeholder="Email"
           />
           <Input
-            ref={register({
+            {...register("username", {
               required: "Username is required.",
             })}
-            name="username"
             type="text"
             placeholder="Username"
           />
           <Input
-            ref={register({
+            {...register("password", {
               required: "Password is required.",
             })}
-            name="password"
             type="password"
             placeholder="Password"
           />

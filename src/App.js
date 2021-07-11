@@ -23,6 +23,7 @@ function App() {
           <Router>
             <Switch>
               <Route path={routes.home} exact>
+                {/* Login이나 SignUp에서 Header를 숨기기 위해서 Layout를 사용함. */}
                 {isLoggedIn ? (
                   <Layout>
                     <Home />

@@ -127,8 +127,7 @@ function Comments({ photoId, author, caption, commentNumber, comments }) {
       <PostCommentContainer>
         <form onSubmit={handleSubmit(onValid)}>
           <PostCommentInput
-            name="payload"
-            ref={register({ required: true })}
+            {...register("payload", { required: true })}
             type="text"
             placeholder="Write a comment..."
           />
